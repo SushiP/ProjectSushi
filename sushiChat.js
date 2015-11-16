@@ -1,6 +1,6 @@
 var fs = require("fs"), url = require("url"), sock = require('socket.io')(require("http")); //Node Js and Socket.io require.
 var userLib = require("./manage_user.js"); //manage user library.
-var port = 9350;
+var port = process.env.PORT || 1337;;
 var mimeTypes = {
     "html": "text/html",
     "jpeg": "image/jpeg",
@@ -10,7 +10,7 @@ var mimeTypes = {
     "css": "text/css"
 };
 var staticFolder = "public";
-var server = require("http").createServer(router).listen(port,'23.97.225.177'); //server
+var server = require("http").createServer(router).listen(port); //server
 var connectedUser = [];
 var rooms = [];
 
@@ -28,6 +28,7 @@ setInterval(function(){
 
 
 function router(req, res){
+    console.log(port);
     var path = url.parse(req.url).pathname;
     
     function print404(){
